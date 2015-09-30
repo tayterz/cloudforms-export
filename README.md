@@ -1,15 +1,18 @@
 # cloudforms-export
 This code enables the export of a VM from RHEV to another format.  In this scenario, you might not have your entire hybrid cloud managed by CloudForms and you need to move your VM from RHEV to another virtual infrastructure or cloud.  This automate code…
 
+Once the export is complete, it is presented as an HTTPS download with the URL listed as a Custom Attribute of the exported Virtual Machine.
+
 1. Exports the virtual machine
 2. Converts it to an OVA for RHEV, vmdk for VMware, or Qcow2 for OpenStack.
 3. Creates a folder in the export storage domain share based on the user name logged into CloudForms
 4. Places the exported VM in that folder
 5. Deletes the VM from the export storage domain
+6. Creates a Custom Attribute containing the HTTPS URL of the exported file.
 
 Note: This requires CFME 5.3 or better.
 
-Note2: You must install qemu-img on your CloudForms appliance
+Note2: You must install qemu-img and glusterfs-fuse packages on your CloudForms appliance
 
 Note3: This code mounts the export storage domain as NFS
 
@@ -35,3 +38,5 @@ Note3: This code mounts the export storage domain as NFS
  b. “Export for VMware” —> System/Process/Request Request—>ExportVmdk
  
  c. “Export for OpenStack” —> System/Process/Request Request—>ExportQcow2
+12.  Create a symlink from the "public" directory of the CloudForms appliance (/var/www/..../public/exports/) to /mnt/exports/
+13.  Set the "export_domain" schema variable to the correct name of your Export Domain.

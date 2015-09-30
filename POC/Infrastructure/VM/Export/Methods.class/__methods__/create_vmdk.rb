@@ -1,6 +1,8 @@
 #
 # Description: Create the vmdk file
 # Author: Kenneth D. Evensen <kenneth.evensen@redhat.com>
+# Updated: Taylor Biggs <taylor@redhat.com>
+#  - add custom attribute for download link
 #
 
 
