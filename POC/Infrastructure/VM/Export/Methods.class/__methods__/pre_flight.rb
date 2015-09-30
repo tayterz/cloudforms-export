@@ -7,7 +7,7 @@ require 'open3'
 @method = 'pre_flight'
 $evm.log("info", "----Entering method #{@method}----")
 
-cmd = "yum list installed | grep qemu-img"
+cmd = "rpm -qa | grep qemu-img"
 
 Open3.popen3(cmd) do |stdin, stdout, stderr, wthr|
 	

@@ -92,6 +92,10 @@ create_initial_tar(user.name, store_id, my_vm_name, vm.uid_ems, vdisk_location)
 
 make_ova(user.name, my_vm_name)
 
+# set custom attribute to keep track of new OVA file...
+
+vm.custom_set("Latest RHEV Export","https://#{$evm.root['miq_server'].hostname}/exports/#{user.name}/#{my_vm_name}.ova")
+
 
 $evm.log("info", "----Exiting method #{@method}----")
 

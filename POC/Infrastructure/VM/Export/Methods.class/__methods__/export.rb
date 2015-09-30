@@ -29,10 +29,13 @@ stores.each { |store|
     
 }
 
+$evm.log("info","Selected #{export_domain} as Export Domain")
+
 export_store_id =  export_domain.ems_ref.sub("/api/storagedomains/","")
+payload = "<action><storage_domain id=\"#{export_store_id}\"/><exclusive>true</exclusive><discard_snapshots>false</discard_snapshots></action>"
 
-payload = "<action><storage_domain id=\"#{export_store_id}\"/><exclusive>true</exclusive></action>"
 
+$evm.log("info","payload = #{payload}")
 response = RestClient::Request.new(
           :method => :post,
           :url => url,
@@ -45,10 +48,14 @@ response = RestClient::Request.new(
       ).execute
 
 xml_response  = Nokogiri::XML(response)
+#xml_response = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>
 
 $evm.log("info","Response - #{response}")
 
 job_id = xml_response.xpath("//job/@href").first.value
+
 $evm.root['job_id'] = job_id
 
-$evm.log("info", "----Exiting method #{@method}----")
+
+
+#$evm.log("info", "----Exiting method #{@method}----")

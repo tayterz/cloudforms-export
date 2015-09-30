@@ -67,6 +67,7 @@ vdisk_location = extract_vdisk_location("/mnt/exports/#{store_id}/master/vms/#{v
 
 create_vmdk(user.name, store_id, my_vm_name, vm.uid_ems, vdisk_location)
 
+vm.custom_set("Latest QCOW2 Export","https://#{$evm.root['miq_server'].hostname}/exports/#{user.name}/#{my_vm_name}.qcow2")
 
 $evm.log("info", "----Exiting method #{@method}----")
 
